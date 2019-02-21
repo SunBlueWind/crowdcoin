@@ -1,0 +1,18 @@
+{
+  "name": "kickstarter",
+  "version": "1.0.0",
+  "description": "ethereum and React web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lanfeng Sun",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "ganache-cli": "^6.3.0",
+    "mocha": "^6.0.0",
+    "solc": "^0.4.17",
+    "web3": "^1.0.0-beta.35"
+  }
+}
