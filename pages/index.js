@@ -1,14 +1,28 @@
 import React, { Component } from "react";
+import { Button } from "semantic-ui-react";
+import Layout from "../components/Layout";
+import CampaignList from "../components/CampaignList";
 import factory from "../ethereum/factory";
 
 class Home extends Component {
-  async componentDidMount() {
+  static async getInitialProps() {
     const campaigns = await factory.methods.getDeployedCampaigns().call();
-    console.log(campaigns);
+    return { campaigns };
   }
 
   render() {
-    return <p>Index page</p>;
+    return (
+      <Layout>
+        <Button
+          basic
+          content="Create Campaign"
+          icon="plus"
+          color="teal"
+          floated="right"
+        />
+        <CampaignList campaigns={this.props.campaigns} />
+      </Layout>
+    );
   }
 }
 
