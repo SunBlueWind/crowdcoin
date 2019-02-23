@@ -1,4 +1,5 @@
 node_modules/
+.next
 build
 ethereum/address.txt
 ethereum/deploy.js
