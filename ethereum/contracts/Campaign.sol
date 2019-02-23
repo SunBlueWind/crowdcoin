@@ -1,6 +1,6 @@
 pragma solidity ^0.4.17;
 
-contract CampaignFactor {
+contract CampaignFactory {
     address[] public deployedCampaigns;
     
     function createCampaign(uint minimum) public {
@@ -27,7 +27,7 @@ contract Campaign {
     uint public minimumContribution;
     address public manager;
     uint public contributorCount;
-    mapping(address => bool) public contributor;
+    mapping(address => bool) public contributors;
     Request[] public requests;
     
     modifier restricted() {
@@ -42,14 +42,14 @@ contract Campaign {
     
     function contribute() public payable {
         require(msg.value >= minimumContribution);
-        contributor[msg.sender] = true;
+        contributors[msg.sender] = true;
         contributorCount++;
     }
     
     function approveRequest(uint index) public {
         Request storage request = requests[index];
         
-        require(contributor[msg.sender]);
+        require(contributors[msg.sender]);
         require(!request.approvers[msg.sender]);
         
         request.approvers[msg.sender] = true;

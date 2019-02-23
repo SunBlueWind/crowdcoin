@@ -4,7 +4,8 @@
   "description": "ethereum and React web app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "compile": "node ethereum/compile.js"
   },
   "author": "Lanfeng Sun",
   "license": "ISC",
