@@ -11,7 +11,7 @@ class NewCampaignForm extends Component {
     minimumContribution: "",
     error: "",
     loading: false,
-    unit: "wei"
+    unit: "ether"
   };
 
   get units() {
@@ -79,7 +79,7 @@ class NewCampaignForm extends Component {
                 />
               }
               labelPosition="right"
-              placeholder="Minimum contribution in wei to be qualified as a contributor"
+              placeholder="Minimum contribution to be qualified as a contributor"
               value={this.state.minimumContribution}
               onChange={e => {
                 this.setState({ minimumContribution: e.target.value });

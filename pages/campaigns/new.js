@@ -8,7 +8,7 @@ class NewCampaignPage extends Component {
     return (
       <Layout>
         <Header as="h2">
-          <Icon name="idea" />
+          <Icon name="idea" color="teal" />
           <Header.Content>
             Create a campaign
             <Header.Subheader>
