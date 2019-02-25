@@ -3,9 +3,9 @@ pragma solidity ^0.4.17;
 contract CampaignFactory {
     address[] public deployedCampaigns;
     
-    function createCampaign(uint minimum) public {
+    function createCampaign(string title, uint minimum) public {
         deployedCampaigns.push(
-            new Campaign(minimum, msg.sender)
+            new Campaign(title, minimum, msg.sender)
         );
     }
     
@@ -24,9 +24,10 @@ contract Campaign {
         mapping(address => bool) approvers;
     }
     
+    string public title;
     uint public minimumContribution;
     address public manager;
-    uint public contributorCount;
+    uint public contributorsCount;
     mapping(address => bool) public contributors;
     Request[] public requests;
     
@@ -35,7 +36,8 @@ contract Campaign {
         _;
     }
     
-    function Campaign(uint minimum, address creator) public {
+    function Campaign(string campaignTitle, uint minimum, address creator) public {
+        title = campaignTitle;
         manager = creator;
         minimumContribution = minimum;
     }
@@ -43,7 +45,7 @@ contract Campaign {
     function contribute() public payable {
         require(msg.value >= minimumContribution);
         contributors[msg.sender] = true;
-        contributorCount++;
+        contributorsCount++;
     }
     
     function approveRequest(uint index) public {
@@ -71,9 +73,22 @@ contract Campaign {
         Request storage request = requests[index];
         
         require(!request.completed);
-        require(request.approversCount > contributorCount / 2);
+        require(request.approversCount > contributorsCount / 2);
         
         request.recipient.transfer(request.amount);
         request.completed = true;
+    }
+
+    function getSummary() public view returns (
+        string, uint, address, uint, uint, uint
+    ) {
+        return (
+            title,
+            minimumContribution,
+            manager,
+            this.balance,
+            contributorsCount,
+            requests.length
+        );
     }
 }

@@ -7,7 +7,8 @@ import { Router } from "../routes";
 
 class NewCampaignForm extends Component {
   state = {
-    value: "",
+    title: "",
+    minimumContribution: "",
     error: "",
     loading: false,
     unit: "wei"
@@ -22,13 +23,15 @@ class NewCampaignForm extends Component {
 
   onSubmit = async event => {
     event.preventDefault();
-    const { value, unit } = this.state;
-    this.setState({ loading: true, error: "", value: "" });
+    const { title, minimumContribution, unit } = this.state;
+    this.setState({ loading: true, error: "" });
 
     try {
       const accounts = await web3.eth.getAccounts();
-      const amount = web3.utils.toWei(value, unit);
-      await factory.methods.createCampaign(amount).send({ from: accounts[0] });
+      const amount = web3.utils.toWei(minimumContribution, unit);
+      await factory.methods
+        .createCampaign(title, amount)
+        .send({ from: accounts[0] });
       Router.pushRoute("/");
     } catch (err) {
       this.setState({ error: err.message });
@@ -51,6 +54,17 @@ class NewCampaignForm extends Component {
 
         <Form loading={this.state.loading} onSubmit={this.onSubmit}>
           <Form.Field required>
+            <label>Title</label>
+            <Input
+              required
+              placeholder="Title of your campaign"
+              value={this.state.title}
+              onChange={e => {
+                this.setState({ title: e.target.value });
+              }}
+            />
+          </Form.Field>
+          <Form.Field required>
             <label>Minimum contribution</label>
             <Input
               required
@@ -66,9 +80,9 @@ class NewCampaignForm extends Component {
               }
               labelPosition="right"
               placeholder="Minimum contribution in wei to be qualified as a contributor"
-              value={this.state.value}
+              value={this.state.minimumContribution}
               onChange={e => {
-                this.setState({ value: e.target.value });
+                this.setState({ minimumContribution: e.target.value });
               }}
             />
           </Form.Field>

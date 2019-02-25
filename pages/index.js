@@ -12,6 +12,7 @@ class HomePage extends Component {
   }
 
   render() {
+    console.log(this.props.campaigns);
     return (
       <Layout>
         <Link route="/campaign/new">
