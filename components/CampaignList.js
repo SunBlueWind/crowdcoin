@@ -9,11 +9,21 @@ export default props => (
         fluid
         header={address}
         description={
-          <Link route={`/campaign/${address}`}>
-            <a>View Campaign</a>
-          </Link>
+          <React.Fragment>
+            <div>
+              <Link route={`/campaign/${address}`}>
+                <a>View Campaign</a>
+              </Link>
+            </div>
+            <div>
+              <Link route={`/campaign/${address}/requests`}>
+                <a>View Requests</a>
+              </Link>
+            </div>
+          </React.Fragment>
         }
         key={address}
+        color="teal"
       />
     ))}
   </Card.Group>

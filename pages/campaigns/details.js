@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Header, Statistic, Icon, Divider, Grid } from "semantic-ui-react";
+import { Header, Icon, Divider, Grid, Button } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import ContributeForm from "../../components/ContributeForm";
+import CampaignStats from "../../components/CampaignStats";
 import campaign from "../../ethereum/campaign";
-import web3 from "../../ethereum/web3";
+import { Link } from "../../routes";
 
 class CampaignDetailPage extends Component {
   state = {
@@ -65,24 +66,17 @@ class CampaignDetailPage extends Component {
         <Divider hidden />
         <Grid>
           <Grid.Column width={10}>
-            <Statistic.Group horizontal>
-              <Statistic
-                value={web3.utils.fromWei(
-                  this.state.minimumContribution,
-                  "ether"
-                )}
-                label="minimum contribution (ether)"
-              />
-              <Statistic
-                value={web3.utils.fromWei(this.state.balance, "ether")}
-                label="campaign balance (ether)"
-              />
-              <Statistic
-                value={this.state.contributorsCount}
-                label="contributors"
-              />
-              <Statistic value={this.state.requestsCount} label="requests" />
-            </Statistic.Group>
+            <CampaignStats
+              minimumContribution={this.state.minimumContribution}
+              balance={this.state.balance}
+              contributorsCount={this.state.contributorsCount}
+              requestsCount={this.state.requestsCount}
+            />
+            <Link route={`/campaign/${this.state.address}/requests`}>
+              <a>
+                <Button color="teal">View requests</Button>
+              </a>
+            </Link>
           </Grid.Column>
           <Grid.Column width={6}>
             <ContributeForm
