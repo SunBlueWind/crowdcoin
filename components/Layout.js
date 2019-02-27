@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import { Container, Divider } from "semantic-ui-react";
+import { Container, Divider, Transition } from "semantic-ui-react";
 import Header from "./Header";
 
 export default props => {
@@ -14,7 +14,9 @@ export default props => {
       </Head>
       <Header />
       <Divider hidden />
-      <Container>{props.children}</Container>
+      <Transition animation="fade" duration={500} transitionOnMount>
+        <Container>{props.children}</Container>
+      </Transition>
     </React.Fragment>
   );
 };

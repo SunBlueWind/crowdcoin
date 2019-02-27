@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "compile": "node ethereum/compile.js",
-    "dev": "next dev"
+    "build": "next build"
   },
   "author": "Lanfeng Sun",
   "license": "ISC",
