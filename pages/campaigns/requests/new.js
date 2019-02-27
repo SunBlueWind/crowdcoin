@@ -3,12 +3,16 @@ import { Header, Icon, Divider } from "semantic-ui-react";
 import Layout from "../../../components/Layout";
 import NewRequestForm from "../../../components/NewRequestForm";
 import web3 from "../../../ethereum/web3";
+import campaign from "../../../ethereum/campaign";
+import { Link } from "../../../routes";
 
-class NewCampaignPage extends Component {
+class NewRequestPage extends Component {
   static async getInitialProps(props) {
     const address = props.query.address;
+    const camp = campaign(address);
+    const title = await camp.methods.title().call();
     const balance = await web3.eth.getBalance(address);
-    return { address, balance };
+    return { address, balance, title };
   }
 
   render() {
@@ -17,9 +21,12 @@ class NewCampaignPage extends Component {
         <Header as="h2">
           <Icon name="idea" color="teal" />
           <Header.Content>
-            Create a request
+            Create a request for {this.props.title}
             <Header.Subheader>
-              Create a spending request for campaign {this.props.address}.
+              Address at{" "}
+              <Link route={`/campaign/${this.props.address}`}>
+                <a>{this.props.address}</a>
+              </Link>
             </Header.Subheader>
             <Header.Subheader>
               Note that the maximum amount of the request is{" "}
@@ -34,4 +41,4 @@ class NewCampaignPage extends Component {
   }
 }
 
-export default NewCampaignPage;
+export default NewRequestPage;
