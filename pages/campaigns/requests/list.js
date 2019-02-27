@@ -17,7 +17,6 @@ class ListRequestsPage extends Component {
         .fill()
         .map(async (_, idx) => await camp.methods.requests(idx).call())
     );
-    console.log(requests);
     return { address, requests, requestsLength, title, contributorsCount };
   }
 
@@ -42,6 +41,7 @@ class ListRequestsPage extends Component {
         <RequestsTable
           requests={this.props.requests}
           contributorsCount={this.props.contributorsCount}
+          address={this.props.address}
         />
         <p>Found {this.props.requestsLength} requests.</p>
       </Layout>
