@@ -35,7 +35,6 @@ class CampaignDetailPage extends Component {
 
   updateSummary = async () => {
     const camp = campaign(this.props.address);
-    console.log(this.props.address, camp);
     const summary = await camp.methods.getSummary().call();
     this.setState({
       title: summary[0],

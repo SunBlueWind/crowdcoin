@@ -82,7 +82,7 @@ class RequestTableRow extends Component {
               basic
               color="teal"
               loading={this.state.finalizeLoading}
-              disabled={request.completed}
+              disabled={request.completed || !this.props.isManager}
               onClick={() => this.onClickFinalize(index)}
             >
               Finalize
@@ -122,6 +122,7 @@ class RequestsTable extends Component {
               index={idx}
               address={this.props.address}
               contributorsCount={this.props.contributorsCount}
+              isManager={this.props.isManager}
             />
           ))}
         </Body>
