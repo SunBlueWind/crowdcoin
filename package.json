@@ -7,7 +7,7 @@
     "test": "mocha",
     "compile": "node ethereum/compile.js",
     "build": "next build",
-    "start": "next build && next start",
+    "start": "next start",
     "dev": "node server.js",
     "now-build": "next build && next export -o dist"
   },
