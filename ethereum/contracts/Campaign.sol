@@ -75,8 +75,12 @@ contract Campaign {
         require(!request.completed);
         require(request.approversCount > contributorsCount / 2);
         
-        request.recipient.transfer(request.amount);
         request.completed = true;
+        request.recipient.transfer(request.amount);
+    }
+
+    function getRequestsLength() public view returns (uint) {
+        return requests.length;
     }
 
     function getSummary() public view returns (
