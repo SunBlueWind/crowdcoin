@@ -7,7 +7,7 @@
     "test": "mocha",
     "compile": "node ethereum/compile.js",
     "build": "next build",
-    "start": "node server.js",
+    "start": "next build && node server.js",
     "now-build": "next build && next export -o dist"
   },
   "author": "Lanfeng Sun",
