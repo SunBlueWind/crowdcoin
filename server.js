@@ -6,8 +6,8 @@ const app = next({ dev: process.env.NODE_ENV !== "production", quiet: false });
 const handler = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
-  createServer(handler).listen(3000, err => {
+  createServer(handler).listen(process.env.PORT || 8080, err => {
     if (err) throw error;
-    console.log("Listening on port 3000");
+    console.log("Application started");
   });
 });
